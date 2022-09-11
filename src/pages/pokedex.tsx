@@ -34,9 +34,9 @@ type PokemonCardProps = {
 
 const PokemonCard = ({ name, type1, type2, sprite }: PokemonCardProps) => {
   return (
-    <section className="flex flex-col w-48 h-48 justify-center p-6 rounded-md border-4 border-gray-400 motion-safe:hover:scale-105 duration-500">
+    <section className="flex flex-col w-48 h-48 justify-center items-center p-6 rounded-md border-4 border-gray-400 motion-safe:hover:scale-105 duration-500">
       <h3 className="font-bold text-gray-300">{name}</h3>
-      <p className="text-gray-400"></p>
+      <p className="text-gray-400">{type1 + "/" + type2}</p>
       <img src={sprite} className="w-full" />
     </section>
   );
@@ -45,12 +45,12 @@ const PokemonCard = ({ name, type1, type2, sprite }: PokemonCardProps) => {
 const AllPokemon = () => {
   let PokeArray: [string?, string?, string?, string?][] = new Array();
 
-  for (let i: number = 1; i < 800; i++) {
+  for (let i: number = 1; i < 905; i++) {
     const pokemon = trpc.useQuery(["pokemon-get", { id: i }]);
     PokeArray.push([
       pokemon.data?.name,
-      "",
-      "",
+      pokemon.data?.types[0]?.type.name,
+      pokemon.data?.types[1]?.type.name,
       pokemon.data?.sprites.front_default != null
         ? pokemon.data?.sprites.front_default
         : "",
