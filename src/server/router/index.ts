@@ -2,11 +2,11 @@
 import { createRouter } from "./context";
 import superjson from "superjson";
 
-import { exampleRouter } from "./example";
+import { pokeRouter } from "./pokeinfo";
 
 export const appRouter = createRouter()
   .transformer(superjson)
-  .merge("example.", exampleRouter);
+  .merge("", pokeRouter);
 
 // export type definition of API
 export type AppRouter = typeof appRouter;
