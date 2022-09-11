@@ -14,10 +14,15 @@ const Home: NextPage = () => {
         <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-200">
           Welcome to <span className="text-red-400">Blais.gg</span>
         </h1>
-        <div className="grid gap-3 pt-3 mt-3 text-center md:grid-cols-2 lg:w-2/3">
+        <div className="flex flex-wrap w-screen justify-center pt-3 mt-3 text-center">
           <ProjectCard
             name="PokeDex"
             description="A quick showcase of all pokemon"
+            link="/pokedex"
+          />
+          <ProjectCard
+            name="Wordle Clone"
+            description="Who Doesn't like a good Wordle Clone?"
             link="/pokedex"
           />
         </div>
