@@ -23,6 +23,8 @@ const Home: NextPage = () => {
   );
 };
 
+//<AllPokemon />
+
 type PokemonCardProps = {
   name?: string;
   type1?: string;

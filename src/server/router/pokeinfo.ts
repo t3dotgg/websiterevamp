@@ -1,7 +1,6 @@
 import { createRouter } from "./context";
 import { z } from "zod";
 import { PokemonClient } from "pokenode-ts";
-import { resolve } from "path";
 
 export const pokeRouter = createRouter().query("pokemon-get", {
   input: z.object({id: z.number()}),
