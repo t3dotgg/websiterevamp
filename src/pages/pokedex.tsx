@@ -39,7 +39,7 @@ const PokemonCard = ({ ID, name, types, sprite }: PokemonCardProps) => {
 
 const AllPokemon = () => {
   const names = trpc.useQuery(["pokemon-get-names", { id: 0 }]);
-  const PokeNames: Array<string> = new Array();
+  const PokeNames: string[] = [];
   for (let i = 0; i < 905; i++) {
     PokeNames.push(names.data?.results[i]?.name as string);
   }
@@ -48,6 +48,7 @@ const AllPokemon = () => {
       {PokeNames.map((item, index) => {
         return (
           <PokemonCard
+            key={index}
             ID={index + 1}
             name={item}
             types={[]}
