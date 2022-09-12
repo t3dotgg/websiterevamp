@@ -13,6 +13,7 @@ export const pokeRouter = createRouter().query("pokemon-get", {
   },
 });
 
+//Test
 export const pokeNames = createRouter().query("pokemon-get-names", {
   input: z.object({id: z.number()}),
     async resolve({input}){
