@@ -38,8 +38,8 @@ const PokemonCard = ({ ID, name, types, sprite }: PokemonCardProps) => {
 };
 
 const AllPokemon = () => {
-  let names = trpc.useQuery(["pokemon-get-names", { id: 0 }]);
-  let PokeNames: Array<string> = new Array();
+  const names = trpc.useQuery(["pokemon-get-names", { id: 0 }]);
+  const PokeNames: Array<string> = new Array();
   for (let i = 0; i < 905; i++) {
     PokeNames.push(names.data?.results[i]?.name as string);
   }
