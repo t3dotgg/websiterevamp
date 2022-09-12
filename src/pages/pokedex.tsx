@@ -1,8 +1,5 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { PokemonSprites } from "pokenode-ts";
-import React from "react";
-import { number, string } from "zod";
 import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
@@ -23,49 +20,40 @@ const Home: NextPage = () => {
   );
 };
 
-//<AllPokemon />
-
 type PokemonCardProps = {
-  name?: string;
-  type1?: string;
-  type2?: string;
-  sprite?: string;
+  ID: number;
+  name: string;
+  types: string[];
+  sprite: string;
 };
 
-const PokemonCard = ({ name, type1, type2, sprite }: PokemonCardProps) => {
+const PokemonCard = ({ ID, name, types, sprite }: PokemonCardProps) => {
   return (
     <section className="flex flex-col w-48 h-48 justify-center items-center p-6 rounded-md border-4 border-gray-400 motion-safe:hover:scale-105 duration-500">
       <h3 className="font-bold text-gray-300">{name}</h3>
-      <p className="text-gray-400">{type1 + "/" + type2}</p>
+      <p className="text-gray-400">{ID}</p>
       <img src={sprite} className="w-full" />
     </section>
   );
 };
 
 const AllPokemon = () => {
-  let PokeArray: [string?, string?, string?, string?][] = new Array();
-
-  for (let i: number = 1; i < 905; i++) {
-    const pokemon = trpc.useQuery(["pokemon-get", { id: i }]);
-    PokeArray.push([
-      pokemon.data?.name,
-      pokemon.data?.types[0]?.type.name,
-      pokemon.data?.types[1]?.type.name,
-      pokemon.data?.sprites.front_default != null
-        ? pokemon.data?.sprites.front_default
-        : "",
-    ]);
+  let names = trpc.useQuery(["pokemon-get-names", { id: 0 }]);
+  let PokeNames: Array<string> = new Array();
+  for (let i = 0; i < 905; i++) {
+    PokeNames.push(names.data?.results[i]?.name as string);
   }
-
   return (
     <>
-      {PokeArray.map((item, index) => {
+      {PokeNames.map((item, index) => {
         return (
           <PokemonCard
-            name={item[0]}
-            type1={item[1]}
-            type2={item[2]}
-            sprite={item[3]}
+            ID={index + 1}
+            name={item}
+            types={[]}
+            sprite={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+              index + 1
+            }.png`}
           />
         );
       })}
