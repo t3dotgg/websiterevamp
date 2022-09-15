@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import React, { useState } from "react";
 import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
@@ -13,7 +14,7 @@ const Home: NextPage = () => {
 
       <main className="p-6 justify-center items-center">
         <div className="container flex flex-wrap items-center justify-start gap-5">
-          <AllPokemon />
+          {AllPokemon()}
         </div>
       </main>
     </>
@@ -27,39 +28,52 @@ type PokemonCardProps = {
   sprite: string;
 };
 
-const PokemonCard = ({ ID, name, types, sprite }: PokemonCardProps) => {
-  return (
-    <section className="flex flex-col w-48 h-48 justify-center items-center p-6 rounded-md border-4 border-gray-400 motion-safe:hover:scale-105 duration-500">
-      <h3 className="font-bold text-gray-300">{name}</h3>
-      <p className="text-gray-400">{ID}</p>
-      <img src={sprite} className="w-full" />
-    </section>
-  );
-};
-
-const AllPokemon = () => {
+function AllPokemon() {
   const names = trpc.useQuery(["pokemon-get-names", { id: 0 }]);
-  const PokeNames: string[] = [];
+  const PokeNames: PokemonCardProps[] = [];
   for (let i = 0; i < 905; i++) {
-    PokeNames.push(names.data?.results[i]?.name as string);
+    PokeNames.push({
+      ID: i + 1,
+      name: names.data?.results[i]?.name as string,
+      types: [],
+      sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+        i + 1
+      }.png`,
+    });
   }
   return (
     <>
       {PokeNames.map((item, index) => {
-        return (
-          <PokemonCard
-            key={index}
-            ID={index + 1}
-            name={item}
-            types={[]}
-            sprite={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-              index + 1
-            }.png`}
-          />
-        );
+        return PokeButton(item);
       })}
     </>
   );
-};
+}
+
+function PokeButton(Poke: PokemonCardProps) {
+  const [PokeButton, setPokeButton] = useState(true);
+
+  const [bStr, setbStr] = useState(
+    "flex flex-col w-48 h-48 justify-center items-center bg-grey-400 p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500"
+  );
+
+  return (
+    <button
+      onClick={() => {
+        setPokeButton(!PokeButton);
+        setbStr(
+          !PokeButton
+            ? "flex flex-col w-48 h-48 justify-center items-center bg-grey-400 p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500"
+            : "flex flex-col w-48 h-48 justify-center items-center bg-green-300 p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500"
+        );
+      }}
+      className={bStr}
+    >
+      <h3 className="font-bold text-gray-300">{Poke.name}</h3>
+      <p className="text-gray-400">{Poke.ID}</p>
+      <img src={Poke.sprite} className="w-full" />
+    </button>
+  );
+}
 
 export default Home;
