@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import type { NextPage } from "next";
 import Head from "next/head";
 import React, { useState } from "react";
@@ -28,6 +29,37 @@ type PokemonCardProps = {
   sprite: string;
 };
 
+const dahsesExpectedList: string[] = [
+  "jangmo-o",
+  "hakamo-o",
+  "Kommo-o",
+  "ho-oh",
+  "porygon-z",
+];
+
+const dashesSpacesList: string[] = [
+  "tapu-lele",
+  "tapu-koko",
+  "tapu-bulu",
+  "tapu-fini",
+];
+
+const dashesDotSpace: string[] = ["mr-mime", "mr-rime"];
+
+function fixList(PokeName: string) {
+  if (PokeName == "nidoran-f") {
+    return "Nidoran Female";
+  } else if (PokeName == "nidoran-m") {
+    return "Nidoran Male";
+  } else if (PokeName == "mime-jr") {
+    return "Mime Jr.";
+  } else if (PokeName == "type-null") {
+    return "Type: Null";
+  } else if (dahsesExpectedList.includes(PokeName)) {
+    return PokeName[0]?.toLocaleUpperCase;
+  }
+}
+
 function AllPokemon() {
   const names = trpc.useQuery(["pokemon-get-names", { id: 0 }]);
   const PokeNames: PokemonCardProps[] = [];
@@ -41,6 +73,7 @@ function AllPokemon() {
       }.png`,
     });
   }
+
   return (
     <>
       {PokeNames.map((item, index) => {
@@ -53,24 +86,21 @@ function AllPokemon() {
 function PokeButton(Poke: PokemonCardProps) {
   const [PokeButton, setPokeButton] = useState(true);
 
-  const [bStr, setbStr] = useState(
-    "flex flex-col w-48 h-48 justify-center items-center bg-grey-400 p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500"
+  const btnClass: string = classNames(
+    "flex flex-col w-48 h-48 justify-center items-center p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500",
+    { "bg-grey-400": PokeButton, "bg-green-400": !PokeButton }
   );
 
   return (
     <button
       onClick={() => {
         setPokeButton(!PokeButton);
-        setbStr(
-          !PokeButton
-            ? "flex flex-col w-48 h-48 justify-center items-center bg-grey-400 p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500"
-            : "flex flex-col w-48 h-48 justify-center items-center bg-green-300 p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500"
-        );
       }}
-      className={bStr}
+      className={btnClass}
     >
-      <h3 className="font-bold text-gray-300">{Poke.name}</h3>
-      <p className="text-gray-400">{Poke.ID}</p>
+      <h3 className="font-bold text-gray-600">
+        {Poke.ID}. {Poke.name}
+      </h3>
       <img src={Poke.sprite} className="w-full" />
     </button>
   );

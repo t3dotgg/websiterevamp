@@ -13,6 +13,7 @@
     "@trpc/next": "^9.27.2",
     "@trpc/react": "^9.27.2",
     "@trpc/server": "^9.27.2",
+    "classnames": "^2.3.2",
     "next": "12.2.5",
     "pokenode-ts": "^1.17.0",
     "react": "18.2.0",
