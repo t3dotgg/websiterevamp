@@ -2,6 +2,8 @@ import classNames from "classnames";
 import type { NextPage } from "next";
 import Head from "next/head";
 import React, { useState } from "react";
+import { string } from "zod";
+import { pokeNames } from "../server/router/pokeinfo";
 import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
@@ -29,22 +31,12 @@ type PokemonCardProps = {
   sprite: string;
 };
 
-const dahsesExpectedList: string[] = [
-  "jangmo-o",
-  "hakamo-o",
-  "Kommo-o",
-  "ho-oh",
-  "porygon-z",
-];
-
 const dashesSpacesList: string[] = [
   "tapu-lele",
   "tapu-koko",
   "tapu-bulu",
   "tapu-fini",
 ];
-
-const dashesDotSpace: string[] = ["mr-mime", "mr-rime"];
 
 function fixList(PokeName: string) {
   if (PokeName == "nidoran-f") {
@@ -55,8 +47,16 @@ function fixList(PokeName: string) {
     return "Mime Jr.";
   } else if (PokeName == "type-null") {
     return "Type: Null";
-  } else if (dahsesExpectedList.includes(PokeName)) {
-    return PokeName[0]?.toLocaleUpperCase;
+  } else if (PokeName == "porygon-z") {
+    return "Porygon-Z";
+  } else if (PokeName == "ho-oh") {
+    return "Ho-Oh";
+  } else if (PokeName == "mr-mime") {
+    return "Mr. Mime";
+  } else if (PokeName == "mr-rime") {
+    return "Mr. Rime";
+  } else {
+    return PokeName;
   }
 }
 
@@ -66,7 +66,7 @@ function AllPokemon() {
   for (let i = 0; i < 905; i++) {
     PokeNames.push({
       ID: i + 1,
-      name: names.data?.results[i]?.name as string,
+      name: fixList(names.data?.results[i]?.name as string) as string,
       types: [],
       sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
         i + 1
