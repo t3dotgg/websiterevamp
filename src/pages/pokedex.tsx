@@ -26,19 +26,19 @@ const Home: NextPage = () => {
 
 type PokemonCardProps = {
   ID: number;
-  name: string;
-  types: string[];
-  sprite: string;
+  name: String;
+  types: String[];
+  sprite: String;
 };
 
-const dashesSpacesList: string[] = [
+const dashesSpacesList: String[] = [
   "tapu-lele",
   "tapu-koko",
   "tapu-bulu",
   "tapu-fini",
 ];
 
-function fixList(PokeName: string) {
+function fixList(PokeName: String) {
   if (PokeName == "nidoran-f") {
     return "Nidoran Female";
   } else if (PokeName == "nidoran-m") {
@@ -55,8 +55,21 @@ function fixList(PokeName: string) {
     return "Mr. Mime";
   } else if (PokeName == "mr-rime") {
     return "Mr. Rime";
+  } else if (dashesSpacesList.includes(PokeName)) {
+    if (PokeName?.length > 0) {
+      let newPokeName: string;
+      newPokeName =
+        PokeName.charAt(0).toUpperCase() +
+        PokeName.substring(1, PokeName.indexOf("-")) +
+        " " +
+        PokeName.charAt(PokeName.indexOf("-") + 1).toUpperCase() +
+        PokeName.substring(PokeName.indexOf("-") + 2);
+      return newPokeName;
+    }
   } else {
-    return PokeName;
+    if (PokeName?.length > 0) {
+      return PokeName.charAt(0).toUpperCase() + PokeName.substring(1);
+    }
   }
 }
 
@@ -99,9 +112,9 @@ function PokeButton(Poke: PokemonCardProps) {
       className={btnClass}
     >
       <h3 className="font-bold text-gray-600">
-        {Poke.ID}. {Poke.name}
+        {Poke.ID}. {Poke.name as string}
       </h3>
-      <img src={Poke.sprite} className="w-full" />
+      <img src={Poke.sprite as string} className="w-full" />
     </button>
   );
 }
