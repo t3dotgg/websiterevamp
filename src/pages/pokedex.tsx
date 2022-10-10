@@ -55,8 +55,7 @@ function fixList(PokeName: string) {
     return "Mr. Rime";
   } else if (dashesSpacesList.includes(PokeName)) {
     if (PokeName?.length > 0) {
-      let newPokeName: string;
-      newPokeName =
+      const newPokeName: string =
         PokeName.charAt(0).toUpperCase() +
         PokeName.substring(1, PokeName.indexOf("-")) +
         " " +
