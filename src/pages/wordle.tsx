@@ -19,7 +19,7 @@ type MyProps = {
 };
 
 function LetterBox(props: MyProps) {
-  let divClass: string =
+  const divClass: string =
     "flex flex-col w-14 h-14 justify-center items-center p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500 " +
     props.status;
   return (

@@ -24,19 +24,19 @@ const Home: NextPage = () => {
 
 type PokemonCardProps = {
   ID: number;
-  name: String;
-  types: String[];
-  sprite: String;
+  name: string;
+  types: string[];
+  sprite: string;
 };
 
-const dashesSpacesList: String[] = [
+const dashesSpacesList: string[] = [
   "tapu-lele",
   "tapu-koko",
   "tapu-bulu",
   "tapu-fini",
 ];
 
-function fixList(PokeName: String) {
+function fixList(PokeName: string) {
   if (PokeName == "nidoran-f") {
     return "Nidoran Female";
   } else if (PokeName == "nidoran-m") {
