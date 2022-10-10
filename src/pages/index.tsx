@@ -23,7 +23,7 @@ const Home: NextPage = () => {
           <ProjectCard
             name="Wordle Clone"
             description="Who Doesn't like a good Wordle Clone?"
-            link="/pokedex"
+            link="/wordle"
           />
         </div>
       </main>

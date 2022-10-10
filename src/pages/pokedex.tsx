@@ -2,8 +2,6 @@ import classNames from "classnames";
 import type { NextPage } from "next";
 import Head from "next/head";
 import React, { useState } from "react";
-import { string } from "zod";
-import { pokeNames } from "../server/router/pokeinfo";
 import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
