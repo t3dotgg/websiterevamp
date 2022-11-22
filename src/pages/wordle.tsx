@@ -170,7 +170,7 @@ const Home: NextPage = () => {
       setGuess(guess + 1);
       setCurrentWord("");
     } else if (e.key.length == 1 && currentWord.length < 5) {
-      setCurrentWord(currentWord + e.key);
+      setCurrentWord(currentWord + e.key.toUpperCase());
     }
   };
 
