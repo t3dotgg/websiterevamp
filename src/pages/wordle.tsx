@@ -155,10 +155,9 @@ class WordleBox extends React.Component<MyProps, MyState> {
 
 const Home: NextPage = () => {
   const [theWord, setTheWord] = useState(
-    //myWordsArray[
-    //  Math.round(Math.random() * myWordsArray.length + 0.5)
-    //]?.toUpperCase() as string
-    "hello"
+    myWordsArray[
+      Math.round(Math.random() * myWordsArray.length + 0.5)
+    ]?.toUpperCase() as string
   );
 
   const [currentWord, setCurrentWord] = useState("");
