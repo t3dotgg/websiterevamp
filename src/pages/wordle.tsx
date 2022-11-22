@@ -174,6 +174,12 @@ const Home: NextPage = () => {
     }
   };
 
+  const [end, setEnd] = useState("");
+
+  if (guess > 5) {
+    setEnd(theWord);
+  }
+
   return (
     <>
       <Head>
@@ -224,6 +230,7 @@ const Home: NextPage = () => {
             pos={5}
             currentPos={guess}
           />
+          <h1>{end}</h1>
         </div>
       </main>
     </>
