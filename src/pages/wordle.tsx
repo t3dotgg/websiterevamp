@@ -58,19 +58,19 @@ class WordleBox extends React.Component<MyProps, MyState> {
       this.allDone = true;
     }
 
-    let divClass0: string =
+    const divClass0: string =
       "flex flex-col w-14 h-14 justify-center items-center p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500 " +
       this.state.colors[0];
-    let divClass1: string =
+    const divClass1: string =
       "flex flex-col w-14 h-14 justify-center items-center p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500 " +
       this.state.colors[1];
-    let divClass2: string =
+    const divClass2: string =
       "flex flex-col w-14 h-14 justify-center items-center p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500 " +
       this.state.colors[2];
-    let divClass3: string =
+    const divClass3: string =
       "flex flex-col w-14 h-14 justify-center items-center p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500 " +
       this.state.colors[3];
-    let divClass4: string =
+    const divClass4: string =
       "flex flex-col w-14 h-14 justify-center items-center p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500 " +
       this.state.colors[4];
 
@@ -114,7 +114,7 @@ class WordleBox extends React.Component<MyProps, MyState> {
   }
 
   setColors() {
-    let ret: string[] = [];
+    const ret: string[] = [];
     for (let i = 0; i < 5; i++) {
       ret[i] = LetterStatus.Wrong;
     }
@@ -130,7 +130,7 @@ class WordleBox extends React.Component<MyProps, MyState> {
     for (let i = 0; i < 5; i++) {
       //only work on non-correct letters
       if (ret[i] != LetterStatus.Correct) {
-        let howmany: number = this.countUp(this.finalWord[i] as string);
+        const howmany: number = this.countUp(this.finalWord[i] as string);
         //If only one letter we must check that it has yet to be colored in
         if (howmany != 0) {
           let alreadyCon: number = 0;
