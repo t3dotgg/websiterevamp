@@ -161,6 +161,7 @@ const Home: NextPage = () => {
   );
 
   const [currentWord, setCurrentWord] = useState("");
+  const [end, setEnd] = useState("");
   const [guess, setGuess] = useState(0);
 
   const handleKeyboardEvent = (e: React.KeyboardEvent<HTMLElement>) => {
@@ -169,16 +170,13 @@ const Home: NextPage = () => {
     } else if (e.key === "Enter" && currentWord.length == 5) {
       setGuess(guess + 1);
       setCurrentWord("");
+      if (guess >= 5) {
+        setEnd(theWord);
+      }
     } else if (e.key.length == 1 && currentWord.length < 5) {
       setCurrentWord(currentWord + e.key.toUpperCase());
     }
   };
-
-  const [end, setEnd] = useState("");
-
-  if (guess > 5) {
-    setEnd(theWord);
-  }
 
   return (
     <>
