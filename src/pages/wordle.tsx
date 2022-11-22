@@ -133,7 +133,7 @@ class WordleBox extends React.Component<MyProps, MyState> {
         const howmany: number = this.countUp(this.finalWord[i] as string);
         //If only one letter we must check that it has yet to be colored in
         if (howmany != 0) {
-          let alreadyCon: number = 0;
+          let alreadyCon = 0;
           for (let j = 0; j < 5; j++) {
             if (
               (ret[j] == LetterStatus.Correct ||
