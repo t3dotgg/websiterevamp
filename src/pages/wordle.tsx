@@ -161,21 +161,85 @@ const Home: NextPage = () => {
   );
 
   const [currentWord, setCurrentWord] = useState("");
-  const [end, setEnd] = useState("");
   const [guess, setGuess] = useState(0);
 
   const handleKeyboardEvent = (e: React.KeyboardEvent<HTMLElement>) => {
-    if (e.key === "Backspace" && currentWord.length > 0) {
-      setCurrentWord(currentWord.substring(0, currentWord.length - 1));
-    } else if (e.key === "Enter" && currentWord.length == 5) {
-      setGuess(guess + 1);
-      setCurrentWord("");
-      if (guess >= 5) {
-        setEnd(theWord);
+    if (!isOpen) {
+      if (e.key === "Backspace" && currentWord.length > 0) {
+        setCurrentWord(currentWord.substring(0, currentWord.length - 1));
+      } else if (
+        e.key === "Enter" &&
+        currentWord.length == 5 &&
+        myWordsArray.includes(currentWord.toLowerCase())
+      ) {
+        setGuess(guess + 1);
+        setCurrentWord("");
+        if (guess >= 5 || currentWord == theWord) {
+          setIsOpen(true);
+        }
+      } else if (
+        e.key.length == 1 &&
+        currentWord.length < 5 &&
+        available.includes(e.key.toUpperCase())
+      ) {
+        setCurrentWord(currentWord + e.key.toUpperCase());
       }
-    } else if (e.key.length == 1 && currentWord.length < 5) {
-      setCurrentWord(currentWord + e.key.toUpperCase());
     }
+  };
+
+  const available = [
+    "Q",
+    "W",
+    "E",
+    "R",
+    "T",
+    "Y",
+    "U",
+    "I",
+    "O",
+    "P",
+    "A",
+    "S",
+    "D",
+    "F",
+    "G",
+    "H",
+    "J",
+    "K",
+    "L",
+    "Z",
+    "X",
+    "C",
+    "V",
+    "B",
+    "N",
+    "M",
+  ];
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const Popup = () => {
+    return (
+      <div className="fixed bg-[#00000050] w-screen h-screen top-0 left-0">
+        <div className="container flex flex-col items-center justify-center relative w-1/4 h-1/4 max-w-[25%] max-h-[25%] bg-[#fff] p-5 overflow-auto rounded-md border-4 m-auto mt-10">
+          <h1 className=" text-lg font-bold">
+            Answer: {theWord.toUpperCase()}
+          </h1>
+          <button
+            className={
+              " bg-gray-200 text-center border-4 rounded-md border-gray-500 p-2"
+            }
+            onClick={() => window.location.reload()}
+          >
+            Click to play again!
+          </button>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -191,6 +255,7 @@ const Home: NextPage = () => {
         tabIndex={0}
         onKeyUpCapture={handleKeyboardEvent}
       >
+        {isOpen && <Popup />}
         <div className="container flex flex-col items-center justify-center gap-5">
           <WordleBox
             currentWord={currentWord}
@@ -228,7 +293,6 @@ const Home: NextPage = () => {
             pos={5}
             currentPos={guess}
           />
-          <h1>{end}</h1>
         </div>
       </main>
     </>
