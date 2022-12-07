@@ -14,7 +14,7 @@ const Home: NextPage = () => {
         <h1 className="text-5xl md:text-[5rem] leading-normal font-extrabold text-gray-200">
           Welcome to <span className="text-red-400">Blais.gg</span>
         </h1>
-        <div className="flex flex-wrap w-screen justify-center pt-3 mt-3 text-center">
+        <div className="flex flex-wrap w-screen justify-center pt-3 space-x-3 mt-3 text-center">
           <ProjectCard
             name="PokeDex"
             description="A quick showcase of all pokemon"
@@ -24,6 +24,11 @@ const Home: NextPage = () => {
             name="Wordle Clone"
             description="Who Doesn't like a good Wordle Clone?"
             link="/wordle"
+          />
+          <ProjectCard
+            name="Shiny Game!"
+            description="Find the shiny"
+            link="/shinyGuess"
           />
         </div>
       </main>

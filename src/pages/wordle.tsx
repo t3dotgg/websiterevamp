@@ -10,9 +10,9 @@ import { myWordsArray } from "../utils/words";
 
 enum LetterStatus {
   Unknown = "bg-grey-400",
-  Correct = "bg-green-400",
-  Misplaced = "bg-yellow-400",
-  Wrong = "bg-red-400",
+  Correct = "bg-green-400 border-gray-400",
+  Misplaced = "bg-yellow-400 border-gray-400",
+  Wrong = "bg-red-400 border-gray-400",
 }
 
 const types: string[] = [
@@ -33,6 +33,7 @@ type MyProps = {
 type MyState = {
   colors: string[];
 };
+
 class WordleBox extends React.Component<MyProps, MyState> {
   allDone: boolean;
   finalWord: string;
@@ -58,37 +59,24 @@ class WordleBox extends React.Component<MyProps, MyState> {
       this.allDone = true;
     }
 
-    const divClass0: string =
-      "flex flex-col w-14 h-14 justify-center items-center p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500 " +
-      this.state.colors[0];
-    const divClass1: string =
-      "flex flex-col w-14 h-14 justify-center items-center p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500 " +
-      this.state.colors[1];
-    const divClass2: string =
-      "flex flex-col w-14 h-14 justify-center items-center p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500 " +
-      this.state.colors[2];
-    const divClass3: string =
-      "flex flex-col w-14 h-14 justify-center items-center p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500 " +
-      this.state.colors[3];
-    const divClass4: string =
-      "flex flex-col w-14 h-14 justify-center items-center p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500 " +
-      this.state.colors[4];
+    const stringDiv: string =
+      "flex flex-col w-14 h-14 justify-center items-center p-6 rounded-md border-4 motion-safe:hover:scale-105 duration-500 ";
 
     return (
       <div className="flex flex-row space-x-2">
-        <div className={divClass0}>
+        <div className={stringDiv + this.state.colors[0]}>
           <h3 className="font-bold text-gray-600">{this.finalWord[0]}</h3>
         </div>
-        <div className={divClass1}>
+        <div className={stringDiv + this.state.colors[1]}>
           <h3 className="font-bold text-gray-600">{this.finalWord[1]}</h3>
         </div>
-        <div className={divClass2}>
+        <div className={stringDiv + this.state.colors[2]}>
           <h3 className="font-bold text-gray-600">{this.finalWord[2]}</h3>
         </div>
-        <div className={divClass3}>
+        <div className={stringDiv + this.state.colors[3]}>
           <h3 className="font-bold text-gray-600">{this.finalWord[3]}</h3>
         </div>
-        <div className={divClass4}>
+        <div className={stringDiv + this.state.colors[4]}>
           <h3 className="font-bold text-gray-600">{this.finalWord[4]}</h3>
         </div>
       </div>
