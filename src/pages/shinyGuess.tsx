@@ -19,8 +19,10 @@ const Home: NextPage = () => {
   };
 
   const contain = async (right: boolean) => {
-    await set(right);
-    setTimeout(() => reset(), 1000);
+    if (!guess) {
+      await set(right);
+      setTimeout(() => reset(), 1000);
+    }
   };
 
   const divName =
