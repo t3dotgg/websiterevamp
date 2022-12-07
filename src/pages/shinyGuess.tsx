@@ -23,7 +23,7 @@ const Home: NextPage = () => {
     setTimeout(() => reset(), 1000);
   };
 
-  const divName: string =
+  const divName =
     "container flex flex-wrap items-center justify-start gap-5 w-40 h-40 rounded-md border-4 border-gray-900";
 
   const [guess, setGuess] = useState(false); // false = unguessed true = wrong
